@@ -27,7 +27,6 @@ public class Department {
         this.hod = hod;
     }
 
-
     public ArrayList<Lab> getLabs() {
         return labs;
     }
