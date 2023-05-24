@@ -7,6 +7,9 @@ public class LabStaff extends Employee{
         super(username, grade, password);
         this.staffDetails = staffDetails;
     }
+    public void login(String username, String password) {
+
+    }
 
     public Employee getStaffDetails() {
         return staffDetails;

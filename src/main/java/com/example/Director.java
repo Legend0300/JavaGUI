@@ -3,8 +3,9 @@ package com.example;
 public class Director extends Employee {
     Employee directorDetails;
 
-    public Director(String name, String grade) {
-        super(name, grade);
+    public Director(String username, String grade, String password, Employee directorDetails) {
+        super(username, grade, password);
+        this.directorDetails = directorDetails;
     }
 
     public Employee getDirectorDetails() {
@@ -13,6 +14,9 @@ public class Director extends Employee {
 
     public void setDirectorDetails(Employee directorDetails) {
         this.directorDetails = directorDetails;
+    }
+    public void login(String username,String password){
+
     }
 
     @Override
