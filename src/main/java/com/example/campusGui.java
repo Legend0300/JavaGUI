@@ -1,6 +1,7 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ public class campusGui extends Application {
     private TextField directorEmailField;
     private Button addDepartmentButton;
     private ListView<String> departmentListView;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -69,7 +71,7 @@ public class campusGui extends Application {
     }
 
     private void addDepartment() {
-        // Show a dialog to add department details
+        // Create the dialog
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Add Department");
         dialog.setHeaderText("Enter Department Name");
@@ -87,9 +89,19 @@ public class campusGui extends Application {
 
         dialog.getDialogPane().setContent(dialogPane);
 
+        // Add OK button
+        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+
+        // Enable the OK button when the department name is not empty
+        Node addButtonNode = dialog.getDialogPane().lookupButton(addButton);
+        addButtonNode.setDisable(true);
+        departmentNameField.textProperty().addListener((observable, oldValue, newValue) ->
+                addButtonNode.setDisable(newValue.trim().isEmpty()));
+
         // Set up result handling
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
+            if (dialogButton == addButton) {
                 return departmentNameField.getText();
             }
             return null;
@@ -98,6 +110,7 @@ public class campusGui extends Application {
         // Show the dialog
         dialog.showAndWait().ifPresent(departmentName -> departmentListView.getItems().add(departmentName));
     }
+
 
     // Getters for the form data
     public String getCampusName() {

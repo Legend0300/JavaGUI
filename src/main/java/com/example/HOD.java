@@ -1,6 +1,6 @@
 package com.example;
 
-public class HOD extends Employee{
+public abstract class HOD extends Employee{
     Employee hodDetails;
 
     public HOD(String username, String grade, String password, Employee hodDetails) {
