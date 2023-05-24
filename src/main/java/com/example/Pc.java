@@ -1,11 +1,11 @@
 package com.example;
 public class Pc {
-    int id;
-    String name;
-    String speed;
-    String RAM;
-    String diskSize;
-    String screen;
+   private int id;
+    private String name;
+    private String speed;
+    private String RAM;
+    private String diskSize;
+    private String screen;
 
 
     public Pc(int id, String name, String speed, String RAM, String diskSize, String screen) {

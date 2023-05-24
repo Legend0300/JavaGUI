@@ -1,8 +1,8 @@
 package com.example;
 
-public class Employee {
-    String name;
-    String grade;
+abstract public class Employee {
+    private String name;
+    private String grade;
 
     public Employee(String name, String grade) {
         this.name = name;
@@ -23,6 +23,12 @@ public class Employee {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+    public void password(){
+
+    }
+    public void username(){
+
     }
 
     @Override

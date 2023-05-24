@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Lab {
     LabStaff incharge;
-    String labName;
+    private String labName;
     boolean hasProjector;
     ArrayList<Pc> Pc = new ArrayList<>();
 
