@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Department {
     HOD hod;
-    String departmentName;
+    private String departmentName;
     ArrayList<Lab> labs = new ArrayList<>();
 
     public Department(HOD hod, String departmentName) {

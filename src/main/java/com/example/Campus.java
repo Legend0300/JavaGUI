@@ -3,8 +3,8 @@ package com.example;
 import java.util.ArrayList;
 
 public class Campus {
-    String campusName;
-    String address;
+    private String campusName;
+    private String address;
     Director director;
     ArrayList<Department> departments =new ArrayList<>();
 
