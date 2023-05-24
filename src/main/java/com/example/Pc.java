@@ -1,3 +1,4 @@
+package com.example;
 public class Pc {
     int id;
     String name;

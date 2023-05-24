@@ -1,3 +1,5 @@
+package com.example;
+
 public class Employee {
     String name;
     String grade;
