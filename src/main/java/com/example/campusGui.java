@@ -43,6 +43,9 @@ public class campusGui extends Application {
         addDepartmentButton = new Button("Add Department");
         departmentListView = new ListView<>();
 
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(e -> saveCampusInformation());
+
         // Set up layout
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
@@ -59,6 +62,7 @@ public class campusGui extends Application {
         gridPane.add(directorEmailField, 1, 3);
         gridPane.add(addDepartmentButton, 0, 4);
         gridPane.add(departmentListView, 1, 4);
+        gridPane.add(saveButton,0,5);
 
         // Set up event handling
         addDepartmentButton.setOnAction(e -> addDepartment());
@@ -109,6 +113,9 @@ public class campusGui extends Application {
 
         // Show the dialog
         dialog.showAndWait().ifPresent(departmentName -> departmentListView.getItems().add(departmentName));
+    }
+    private void saveCampusInformation(){
+
     }
 
 
