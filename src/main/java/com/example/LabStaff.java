@@ -3,8 +3,9 @@ package com.example;
 public class LabStaff extends Employee{
     Employee staffDetails;
 
-    public LabStaff(String name, String grade) {
-        super(name, grade);
+    public LabStaff(String username, String grade, String password, Employee staffDetails) {
+        super(username, grade, password);
+        this.staffDetails = staffDetails;
     }
 
     public Employee getStaffDetails() {

@@ -8,6 +8,7 @@ public class Pc {
     String screen;
    private int id;
     private String name;
+
     private String speed;
     private String RAM;
     private String diskSize;

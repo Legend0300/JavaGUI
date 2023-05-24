@@ -2,8 +2,9 @@ package com.example;
 public class HOD extends Employee{
     Employee hodDetails;
 
-    public HOD(String name, String grade) {
-        super(name, grade);
+    public HOD(String username, String grade, String password, Employee hodDetails) {
+        super(username, grade, password);
+        this.hodDetails = hodDetails;
     }
 
     public Employee getHodDetails() {
