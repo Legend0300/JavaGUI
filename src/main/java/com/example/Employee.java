@@ -4,8 +4,7 @@ abstract public class Employee {
    private String username;
     private String grade;
     private String password;
-    public abstract void password(String password);
-    public abstract void username(String username);
+    public abstract void login(String username,String password);
 
     public Employee(String username, String grade, String password) {
         this.username = username;

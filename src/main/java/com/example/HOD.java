@@ -15,6 +15,10 @@ public class HOD extends Employee{
         this.hodDetails = hodDetails;
     }
 
+    public void login(String username, String password) {
+
+    }
+
     @Override
     public String toString() {
         return "HOD{" +
