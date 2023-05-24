@@ -2,6 +2,7 @@ package com.example;
 public class Pc {
    private int id;
     private String name;
+
     private String speed;
     private String RAM;
     private String diskSize;
