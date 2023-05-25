@@ -1,13 +1,14 @@
 package com.example;
-public class Pc {
-   private int id;
-    private String name;
 
+import java.io.*;
+
+public class Pc implements Serializable {
+    private int id;
+    private String name;
     private String speed;
     private String RAM;
     private String diskSize;
     private String screen;
-
 
     public Pc(int id, String name, String speed, String RAM, String diskSize, String screen) {
         this.id = id;
@@ -76,5 +77,27 @@ public class Pc {
                 ", diskSize='" + diskSize + '\'' +
                 ", screen='" + screen + '\'' +
                 '}';
+    }
+
+    // Method to save Pc object to a file
+    public void saveToFile(String fileName) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            outputStream.writeObject(this);
+            System.out.println("Pc saved to file: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error saving Pc to file: " + e.getMessage());
+        }
+    }
+
+    // Static method to load Pc object from a file
+    public static Pc loadFromFile(String fileName) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            Pc pc = (Pc) inputStream.readObject();
+            System.out.println("Pc loaded from file: " + fileName);
+            return pc;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading Pc from file: " + e.getMessage());
+        }
+        return null;
     }
 }

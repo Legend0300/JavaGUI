@@ -1,5 +1,6 @@
 package com.example;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Department {
     HOD hod;
@@ -53,6 +54,26 @@ public class Department {
         for(Lab l: labs){
             if(l.getLabName().equals(labName))
                 return l;
+        }
+        return null;
+    }
+    public void saveToFile(String fileName) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(this);
+            System.out.println("Department saved to file: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error saving department to file: " + e.getMessage());
+        }
+    }
+
+    // Static method to load Department object from a file
+    public static Department loadFromFile(String fileName) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+            Department department = (Department) ois.readObject();
+            System.out.println("Department loaded from file: " + fileName);
+            return department;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading department from file: " + e.getMessage());
         }
         return null;
     }

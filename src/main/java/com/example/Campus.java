@@ -1,6 +1,12 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Campus {
     private String campusName;
@@ -64,10 +70,44 @@ public class Campus {
     public void removeLab(Department d){
         departments.remove(d);
     }
-    public Department getLab(String departmentName){
+    public Department getLab(String departmentName){    
         for(Department d: departments){
             if(d.getDepartmentName().equals(departmentName))
                 return d;
+        }
+        return null;
+    }
+    public void saveToFile(String fileName) {
+        try (PrintWriter writer = new PrintWriter(new File(fileName))) {
+            writer.println(campusName);
+            writer.println(address);
+            writer.println(director.getName());
+            for (Department department : departments) {
+                writer.println(department.getDepartmentName());
+            }
+            System.out.println("Campus saved to file: " + fileName);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error saving campus to file: " + e.getMessage());
+        }
+    }
+
+    // Static method to load Campus object from a file
+    public static Campus loadFromFile(String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            String campusName = scanner.nextLine();
+            String address = scanner.nextLine();
+            String directorName = scanner.nextLine();
+            Director director = new Director(directorName, directorName, directorName);
+
+            Campus campus = new Campus(campusName, address, director);
+            while (scanner.hasNextLine()) {
+                String departmentName = scanner.nextLine();
+                campus.addDepartment(new Department(null, departmentName));
+            }
+            System.out.println("Campus loaded from file: " + fileName);
+            return campus;
+        } catch (FileNotFoundException e) {
+            System.out.println("Error loading campus from file: " + e.getMessage());
         }
         return null;
     }
