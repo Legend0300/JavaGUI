@@ -86,13 +86,7 @@ public class DirectorGUI extends Application {
         String directorPassword = directorPasswordField.getText();
 
         director = new Director(username, grade, password);
-
-
-
-
         director.setDirectorDetails(new Director(directorUsername, directorGrade, directorPassword));
-
-
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Director");
@@ -119,4 +113,3 @@ public class DirectorGUI extends Application {
         }
     }
 }
-

@@ -27,29 +27,29 @@ public class CampusForm extends Application {
     public void start(Stage primaryStage) {
         // Create form components
         Label campusNameLabel = new Label("Campus Name:");
-        TextField campusNameField = new TextField();
-
+        campusNameField = new TextField();
+    
         Label addressLabel = new Label("Address:");
         addressField = new TextField();
-
+    
         Label directorNameLabel = new Label("Director Name:");
         directorNameField = new TextField();
-
+    
         Label directorEmailLabel = new Label("Director Email:");
         directorEmailField = new TextField();
-
+    
         addDepartmentButton = new Button("Add Department");
         departmentListView = new ListView<>();
-
+    
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> saveCampusInformation());
-
+    
         // Set up layout
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
         gridPane.setVgap(10);
         gridPane.setHgap(10);
-
+    
         gridPane.add(campusNameLabel, 0, 0);
         gridPane.add(campusNameField, 1, 0);
         gridPane.add(addressLabel, 0, 1);
@@ -60,17 +60,18 @@ public class CampusForm extends Application {
         gridPane.add(directorEmailField, 1, 3);
         gridPane.add(addDepartmentButton, 0, 4);
         gridPane.add(departmentListView, 1, 4);
-        gridPane.add(saveButton,0,5);
-
+        gridPane.add(saveButton, 0, 5);
+    
         // Set up event handling
         addDepartmentButton.setOnAction(e -> addDepartment());
-
+    
         // Set up scene and stage
         Scene scene = new Scene(gridPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Campus Form");
         primaryStage.show();
     }
+    
 
     private void addDepartment() {
         // Create the dialog
@@ -112,8 +113,22 @@ public class CampusForm extends Application {
         // Show the dialog
         dialog.showAndWait().ifPresent(departmentName -> departmentListView.getItems().add(departmentName));
     }
-    private void saveCampusInformation(){
-
+    private void saveCampusInformation() {
+        String campusName = getCampusName();
+        String address = getAddress();
+        String directorName = getDirectorName();
+        String[] departments = getDepartments();
+    
+        Director director = new Director(directorName, null, null);
+        Campus campus = new Campus(campusName, address, director);
+    
+        for (String department : departments) {
+            Department newDepartment = new Department(null, department);
+            campus.addDepartment(newDepartment);
+        }
+    
+        String fileName = campusName.replaceAll("\\s+", "") + ".txt";
+        campus.saveToFile(fileName);
     }
 
 

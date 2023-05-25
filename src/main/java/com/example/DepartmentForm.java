@@ -31,7 +31,7 @@ public class DepartmentForm extends Application {
         labListView = new ListView<>();
 
         Button saveButton = new Button("Save");
-        saveButton.setOnAction(e -> saveLabInformation());
+        saveButton.setOnAction(e -> saveDepartmentInformation());
 
         // Set up layout
         GridPane gridPane = new GridPane();
@@ -47,7 +47,7 @@ public class DepartmentForm extends Application {
         gridPane.add(hodEmailField, 1, 2);
         gridPane.add(addLabButton, 0, 3);
         gridPane.add(labListView, 1, 3);
-        gridPane.add(saveButton,0,5);
+        gridPane.add(saveButton, 0, 4);
 
         // Set up event handling
         addLabButton.setOnAction(e -> addLab());
@@ -99,10 +99,24 @@ public class DepartmentForm extends Application {
         // Show the dialog
         dialog.showAndWait().ifPresent(labName -> labListView.getItems().add(labName));
     }
-    private void saveLabInformation(){
 
+    private void saveDepartmentInformation() {
+        String departmentName = getDepartmentName();
+        String hodName = getHodName();
+        String hodEmail = getHodEmail();
+        String[] labs = getLabs();
+
+        HOD hod = new HOD(hodName, hodEmail, hodEmail);
+        Department department = new Department(hod, departmentName);
+
+        for (String lab : labs) {
+            Lab newLab = new Lab(null, lab, false);
+            department.addLab(newLab);
+        }
+
+        String fileName = departmentName.replaceAll("\\s+", "") + ".txt";
+        department.saveToFile(fileName);
     }
-
 
     // Getters for the form data
     public String getDepartmentName() {

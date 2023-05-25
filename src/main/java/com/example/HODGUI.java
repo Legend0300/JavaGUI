@@ -86,6 +86,7 @@ public class HODGUI extends Application {
         String hodPassword = hodPasswordField.getText();
 
         hod = new HOD(username, grade, password);
+        hod.setHodDetails(new HOD(hodUsername, hodGrade, hodPassword));
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save HOD");
