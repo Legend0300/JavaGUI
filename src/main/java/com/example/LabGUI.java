@@ -144,7 +144,7 @@ public class LabGUI extends Application {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Lab File", "*.lab"));
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
-            lab.setIncharge(new LabStaff(null, null, null, null));
+            lab.setIncharge(new LabStaff(null, null, null));
             lab.setLabName(labNameField.getText());
             lab.setHasProjector(projectorCheckBox.isSelected());
             lab.saveToFile(file.getPath());

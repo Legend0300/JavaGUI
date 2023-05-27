@@ -69,8 +69,6 @@ public class HOD extends Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "HOD{" +
-                "hodDetails=" + hodDetails +
-                '}';
+        return "HOD{}";
     }
 }

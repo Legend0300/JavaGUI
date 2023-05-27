@@ -22,9 +22,7 @@ public class Director extends Employee {
 
     @Override
     public String toString() {
-        return "Director{" +
-                "directorDetails=" + directorDetails +
-                '}';
+        return "Director{}";
     }
 
     public void saveToFile(String fileName) {

@@ -63,7 +63,7 @@ public class LabStaffGUI extends Application {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Lab Staff File", "*.staff"));
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
-            labStaff = new LabStaff(usernameField.getText(), gradeField.getText(), passwordField.getText(), null);
+            labStaff = new LabStaff(usernameField.getText(), gradeField.getText(), passwordField.getText());
             labStaff.saveToFile(file.getPath());
         }
     }
