@@ -11,6 +11,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class UniversityGUI extends Application {
     private University university;
@@ -69,8 +72,8 @@ public class UniversityGUI extends Application {
         dialog.setHeaderText("Enter Campus Name");
         dialog.setContentText("Campus Name:");
         dialog.showAndWait().ifPresent(campusName -> {
-            Campus campus = new Campus(campusName, campusName, null);
-            university.addCampus(campus);
+//            Campus campus = new Campus(campusName, campusName);
+//            university.addCampus(campus);
             campusListView.getItems().add(campusName);
         });
     }
@@ -86,14 +89,39 @@ public class UniversityGUI extends Application {
     }
 
     private void saveUniversity() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save University");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("University File", "*.uni"));
-        File file = fileChooser.showSaveDialog(null);
-        if (file != null) {
-            university = new University(nameField.getText());
-            university.saveToFile(file.getPath());
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Save University");
+//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
+//        File file = fileChooser.showSaveDialog(null);
+        String filename ="university.txt";
+        University uni = new University(nameField.getText());
+        ArrayList<String> campuses = (ArrayList<String>) campusListView.getItems();
+        for(String c : campuses){
+            Campus camp = new Campus(c);
+            uni.addCampus(camp);
         }
+        uni.saveToFile(filename);
+
+//        if (file != null) {
+//            try (PrintWriter writer = new PrintWriter(file)) {
+//                String universityName = nameField.getText();
+//                University university = new University(universityName);
+//                ArrayList<String> campuses = (ArrayList<String>) campusListView.getItems();
+//
+//                writer.println("University Name: " + universityName);
+//                writer.println("Campuses:");
+//
+//                for (String campus : campuses) {
+//                    writer.println("- " + campus);
+//                    university.addCampus(new Campus(campus, "", null));
+//                }
+//
+//                university.saveToFile(file.getPath());
+//                System.out.println("University saved to file: " + file.getPath());
+//            } catch (IOException e) {
+//                System.out.println("Error saving University to file: " + e.getMessage());
+//            }
+//        }
     }
 
     private void loadUniversity() {

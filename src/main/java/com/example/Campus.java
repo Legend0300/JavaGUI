@@ -20,6 +20,15 @@ public class Campus {
         this.director = director;
     }
 
+    public Campus(String campusName, String address) {
+        this.campusName = campusName;
+        this.address = address;
+    }
+
+    public Campus(String campusName) {
+        this.campusName = campusName;
+    }
+
     @Override
     public String toString() {
         return "Campus{" +
