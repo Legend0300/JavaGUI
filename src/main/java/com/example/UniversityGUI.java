@@ -89,39 +89,14 @@ public class UniversityGUI extends Application {
     }
 
     private void saveUniversity() {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Save University");
-//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
-//        File file = fileChooser.showSaveDialog(null);
-        String filename ="university.txt";
+        String filename = "university.txt";
         University uni = new University(nameField.getText());
-        ArrayList<String> campuses = (ArrayList<String>) campusListView.getItems();
-        for(String c : campuses){
+        ArrayList<String> campuses = new ArrayList<>(campusListView.getItems());
+        for (String c : campuses) {
             Campus camp = new Campus(c);
             uni.addCampus(camp);
         }
         uni.saveToFile(filename);
-
-//        if (file != null) {
-//            try (PrintWriter writer = new PrintWriter(file)) {
-//                String universityName = nameField.getText();
-//                University university = new University(universityName);
-//                ArrayList<String> campuses = (ArrayList<String>) campusListView.getItems();
-//
-//                writer.println("University Name: " + universityName);
-//                writer.println("Campuses:");
-//
-//                for (String campus : campuses) {
-//                    writer.println("- " + campus);
-//                    university.addCampus(new Campus(campus, "", null));
-//                }
-//
-//                university.saveToFile(file.getPath());
-//                System.out.println("University saved to file: " + file.getPath());
-//            } catch (IOException e) {
-//                System.out.println("Error saving University to file: " + e.getMessage());
-//            }
-//        }
     }
 
     private void loadUniversity() {
@@ -140,4 +115,5 @@ public class UniversityGUI extends Application {
             }
         }
     }
+    
 }
