@@ -3,7 +3,7 @@ package com.example;
 import java.io.*;
 import java.util.ArrayList;
 
-public class University implements Serializable {
+class University implements Serializable {
     private String name;
     private ArrayList<Campus> campuses = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class University implements Serializable {
         }
     }
 
-    // Static method to load University object from a file
+    // Method to load University object from a file
     public static University loadFromFile(String fileName) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             University university = (University) inputStream.readObject();
@@ -72,5 +72,27 @@ public class University implements Serializable {
             System.out.println("Error loading University from file: " + e.getMessage());
         }
         return null;
+    }
+
+    // Method to save ArrayList of University objects to a file
+    public static void saveAll(ArrayList<University> universities, String fileName) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            outputStream.writeObject(universities);
+            System.out.println("Universities saved to file: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error saving Universities to file: " + e.getMessage());
+        }
+    }
+
+    // Method to load ArrayList of University objects from a file
+    public static ArrayList<University> loadAll(String fileName) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            ArrayList<University> universities = (ArrayList<University>) inputStream.readObject();
+            System.out.println("Universities loaded from file: " + fileName);
+            return universities;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading Universities from file: " + e.getMessage());
+        }
+        return new ArrayList<>();
     }
 }

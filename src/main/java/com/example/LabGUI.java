@@ -1,10 +1,10 @@
 package com.example;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -65,11 +65,41 @@ public class LabGUI extends Application {
         loadButton.setOnAction(e -> loadLab());
         grid.add(loadButton, 1, 5);
 
-        Scene scene = new Scene(grid, 300, 400);
+        // Create the "Menu" button
+        Button menuButton = new Button(" < ");
+        menuButton.setPrefSize(40, 40);
+        menuButton.setOnAction(e -> {
+            Menu menu = new Menu();
+            menu.start(new Stage());
+            primaryStage.close();
+        });
+
+        // Create a StackPane to hold the "Menu" button
+        StackPane menuButtonPane = new StackPane(menuButton);
+        menuButtonPane.setAlignment(Pos.TOP_LEFT);
+        menuButtonPane.setPadding(new Insets(10));
+
+        // Create an HBox to hold the bottom four buttons
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setPadding(new Insets(10));
+        buttonBox.getChildren().addAll(addButton, removeButton, saveButton, loadButton);
+
+        // Create a VBox to hold the main content
+        VBox vbox = new VBox(10);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+        vbox.getChildren().addAll(grid, buttonBox);
+
+        // Create a BorderPane to hold the main content and the "Menu" button
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(vbox);
+        borderPane.setTop(menuButtonPane);
+
+        Scene scene = new Scene(borderPane, 300, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     private void addPc() {
         Dialog<Pc> dialog = new Dialog<>();
         dialog.setTitle("Add PC");
@@ -125,7 +155,7 @@ public class LabGUI extends Application {
         });
 
         dialog.showAndWait().ifPresent(pc -> {
-          //  lab.addPc(pc);
+          //lab.addPc(pc);
             pcListView.getItems().add(pc);
         });
     }

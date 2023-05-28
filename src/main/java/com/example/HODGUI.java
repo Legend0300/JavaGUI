@@ -1,12 +1,10 @@
 package com.example;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -17,7 +15,6 @@ public class HODGUI extends Application {
     private TextField usernameField;
     private TextField gradeField;
     private TextField passwordField;
-
 
     public static void main(String[] args) {
         launch(args);
@@ -47,7 +44,6 @@ public class HODGUI extends Application {
         grid.add(passwordLabel, 0, 2);
         grid.add(passwordField, 1, 2);
 
-
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> saveHOD());
         grid.add(saveButton, 0, 6);
@@ -56,7 +52,32 @@ public class HODGUI extends Application {
         loadButton.setOnAction(e -> loadHOD());
         grid.add(loadButton, 1, 6);
 
-        Scene scene = new Scene(grid, 300, 250);
+        // Create the "Menu" button
+        Button menuButton = new Button(" < ");
+        menuButton.setPrefSize(40, 40);
+        menuButton.setOnAction(e -> {
+            Menu menu = new Menu();
+            menu.start(new Stage());
+            primaryStage.close();
+        });
+
+        // Create a StackPane to hold the "Menu" button
+        StackPane menuButtonPane = new StackPane(menuButton);
+        menuButtonPane.setAlignment(Pos.TOP_LEFT);
+        menuButtonPane.setPadding(new Insets(10));
+
+        // Create a VBox to hold the main content
+        VBox vbox = new VBox(10);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+        vbox.getChildren().addAll(grid);
+
+        // Create a BorderPane to hold the main content and the "Menu" button
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(vbox);
+        borderPane.setTop(menuButtonPane);
+
+        Scene scene = new Scene(borderPane, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -66,9 +87,7 @@ public class HODGUI extends Application {
         String grade = gradeField.getText();
         String password = passwordField.getText();
 
-
         hod = new HOD(username, grade, password);
-        //hod.setHodDetails(new HOD(hodUsername, hodGrade, hodPassword));
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save HOD");
@@ -88,8 +107,8 @@ public class HODGUI extends Application {
                 usernameField.setText(hod.getUsername());
                 gradeField.setText(hod.getGrade());
                 passwordField.setText(hod.getPassword());
-
             }
         }
     }
 }
+

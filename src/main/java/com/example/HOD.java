@@ -45,7 +45,21 @@ public class HOD extends Employee implements Serializable {
             Employee hodDetails = new Employee(hodUsername, hodGrade, hodPassword) {
                 @Override
                 public void login(String username, String password) {
-                    // Implementation of the login method can be added here
+                {
+
+
+                        if (username.equals(getUsername()) && password.equals(getPassword()))
+                    {
+                            System.out.println("Login successful!");
+                            // Perform further actions or return a success flag
+                    }
+                        else
+                        {
+                            System.out.println("Invalid username or password!");
+                            // Perform further actions or return a failure flag
+                        }
+                    }
+
                 }
             };
             HOD hod = new HOD(username, grade, password) {
@@ -64,8 +78,24 @@ public class HOD extends Employee implements Serializable {
 
     @Override
     public void login(String username, String password) {
-        // Implementation of the login method can be added here
+        {
+
+
+            if (username.equals(getUsername()) && password.equals(getPassword()))
+            {
+                System.out.println("Login successful!");
+                // Perform further actions or return a success flag
+            }
+            else
+            {
+                System.out.println("Invalid username or password!");
+                // Perform further actions or return a failure flag
+            }
+        }
+
     }
+
+
 
     @Override
     public String toString() {
