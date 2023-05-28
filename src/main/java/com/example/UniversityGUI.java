@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -120,7 +121,7 @@ public class UniversityGUI extends Application {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("University File", "*.uni"));
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            university = University.loadFromFile(file.getPath());
+            University university = University.loadFromFile(file.getPath());
             if (university != null) {
                 nameField.setText(university.getName());
                 campusListView.getItems().clear();
