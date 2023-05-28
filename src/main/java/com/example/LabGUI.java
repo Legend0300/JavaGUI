@@ -125,7 +125,7 @@ public class LabGUI extends Application {
         });
 
         dialog.showAndWait().ifPresent(pc -> {
-            lab.addPc(pc);
+          //  lab.addPc(pc);
             pcListView.getItems().add(pc);
         });
     }
@@ -133,7 +133,7 @@ public class LabGUI extends Application {
     private void removePc() {
         Pc selectedPc = pcListView.getSelectionModel().getSelectedItem();
         if (selectedPc != null) {
-            lab.removePc(selectedPc);
+            //lab.removePc(selectedPc);
             pcListView.getItems().remove(selectedPc);
         }
     }
