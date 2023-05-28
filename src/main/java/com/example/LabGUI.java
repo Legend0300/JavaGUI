@@ -69,9 +69,11 @@ public class LabGUI extends Application {
         Button menuButton = new Button(" < ");
         menuButton.setPrefSize(40, 40);
         menuButton.setOnAction(e -> {
-            Menu menu = new Menu();
-            menu.start(new Stage());
+            Stage menuStage = new Stage();
+            MainMenu menu = new MainMenu();
+            menu.start(menuStage);
             primaryStage.close();
+
         });
 
         // Create a StackPane to hold the "Menu" button
@@ -168,13 +170,13 @@ public class LabGUI extends Application {
         }
     }
 
-    private void saveLab() {
+   private void saveLab() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Lab");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Lab File", "*.lab"));
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
-            lab.setIncharge(new LabStaff(null, null, null));
+            lab.setIncharge(new LabStaff("hello","13","123","hello",d));
             lab.setLabName(labNameField.getText());
             lab.setHasProjector(projectorCheckBox.isSelected());
             lab.saveToFile(file.getPath());

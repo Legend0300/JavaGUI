@@ -56,10 +56,12 @@ public class HODGUI extends Application {
         Button menuButton = new Button(" < ");
         menuButton.setPrefSize(40, 40);
         menuButton.setOnAction(e -> {
-            Menu menu = new Menu();
-            menu.start(new Stage());
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.start(new Stage());
             primaryStage.close();
-        });
+
+
+    });
 
         // Create a StackPane to hold the "Menu" button
         StackPane menuButtonPane = new StackPane(menuButton);

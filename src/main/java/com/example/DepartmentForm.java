@@ -1,16 +1,7 @@
+
 package com.example;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,14 +10,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class DepartmentForm extends Application {
+
+
+public class DepartmentForm extends Application{
     private TextField departmentNameField;
     private TextField hodNameField;
     private TextField hodEmailField;
     private Button addLabButton;
     private ListView<String> labListView;
 
-    @Override
     public void start(Stage primaryStage) {
         // Create form components
         Label departmentNameLabel = new Label("Department Name:");
@@ -63,19 +55,17 @@ public class DepartmentForm extends Application {
         // Create the "Back" button
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
-            Menu menu = new Menu();
+            MainMenu menu = new MainMenu();
             menu.start(new Stage());
             primaryStage.close();
         });
 
         // Create an HBox to hold the buttons
         HBox buttonsBox = new HBox(10);
-        buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.getChildren().addAll(backButton, saveButton);
 
         // Create a VBox to hold the main content and the buttons
         VBox vbox = new VBox(10);
-        vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(gridPane, buttonsBox);
 
         // Set up scene and stage
@@ -163,6 +153,7 @@ public class DepartmentForm extends Application {
 
     // Main method to launch the application
     public static void main(String[] args) {
-        launch(args);
+        DepartmentForm departmentForm = new DepartmentForm();
+        departmentForm.start(new Stage());
     }
 }

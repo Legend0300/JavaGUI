@@ -15,6 +15,24 @@ public class LabStaff extends Employee{
     public void setStaffDetails(Employee staffDetails) {
         this.staffDetails = staffDetails;
     }
+    @Override
+    public void login(String username, String password) {
+        {
+
+
+            if (username.equals(getUsername()) && password.equals(getPassword()))
+            {
+                System.out.println("Login successful!");
+                // Perform further actions or return a success flag
+            }
+            else
+            {
+                System.out.println("Invalid username or password!");
+                // Perform further actions or return a failure flag
+            }
+        }
+
+    }
 
     @Override
     public String toString() {
@@ -22,4 +40,6 @@ public class LabStaff extends Employee{
                 "staffDetails=" + staffDetails +
                 '}';
     }
-}
+};
+
+
