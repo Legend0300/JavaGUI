@@ -17,9 +17,7 @@ public class HODGUI extends Application {
     private TextField usernameField;
     private TextField gradeField;
     private TextField passwordField;
-    private TextField hodUsernameField;
-    private TextField hodGradeField;
-    private TextField hodPasswordField;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -49,20 +47,6 @@ public class HODGUI extends Application {
         grid.add(passwordLabel, 0, 2);
         grid.add(passwordField, 1, 2);
 
-        Label hodUsernameLabel = new Label("HOD Username:");
-        hodUsernameField = new TextField();
-        grid.add(hodUsernameLabel, 0, 3);
-        grid.add(hodUsernameField, 1, 3);
-
-        Label hodGradeLabel = new Label("HOD Grade:");
-        hodGradeField = new TextField();
-        grid.add(hodGradeLabel, 0, 4);
-        grid.add(hodGradeField, 1, 4);
-
-        Label hodPasswordLabel = new Label("HOD Password:");
-        hodPasswordField = new TextField();
-        grid.add(hodPasswordLabel, 0, 5);
-        grid.add(hodPasswordField, 1, 5);
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> saveHOD());
@@ -81,12 +65,10 @@ public class HODGUI extends Application {
         String username = usernameField.getText();
         String grade = gradeField.getText();
         String password = passwordField.getText();
-        String hodUsername = hodUsernameField.getText();
-        String hodGrade = hodGradeField.getText();
-        String hodPassword = hodPasswordField.getText();
+
 
         hod = new HOD(username, grade, password);
-        hod.setHodDetails(new HOD(hodUsername, hodGrade, hodPassword));
+        //hod.setHodDetails(new HOD(hodUsername, hodGrade, hodPassword));
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save HOD");
@@ -106,9 +88,7 @@ public class HODGUI extends Application {
                 usernameField.setText(hod.getUsername());
                 gradeField.setText(hod.getGrade());
                 passwordField.setText(hod.getPassword());
-                hodUsernameField.setText(hod.getHodDetails().getUsername());
-                hodGradeField.setText(hod.getHodDetails().getGrade());
-                hodPasswordField.setText(hod.getHodDetails().getPassword());
+
             }
         }
     }
