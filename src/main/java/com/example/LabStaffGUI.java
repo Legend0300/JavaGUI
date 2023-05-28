@@ -9,6 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class LabStaffGUI extends Application {
     private LabStaff labStaff;
@@ -83,6 +85,7 @@ public class LabStaffGUI extends Application {
     }
 
     private void saveLabStaff() {
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Lab Staff");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Lab Staff File", "*.staff"));
