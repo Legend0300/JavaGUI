@@ -60,8 +60,8 @@ public class LoginGUI extends Application {
                 System.out.println("Login successful!");
 
                 // Start the Functionalities
-                Functionalities functionalities = new Functionalities();
-                functionalities.start(new Stage());
+                Menu menu = new Menu();
+                menu.start(new Stage());
 
                 // Close the login window
                 primaryStage.close();
