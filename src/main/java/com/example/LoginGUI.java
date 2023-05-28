@@ -61,7 +61,7 @@ public class LoginGUI extends Application {
 
                 // Start the Functionalities
                 Menu menu = new Menu();
-                menu.start(new Stage());
+                // menu.start(new Stage());
 
                 // Close the login window
                 primaryStage.close();

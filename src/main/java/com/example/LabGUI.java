@@ -125,7 +125,7 @@ public class LabGUI extends Application {
         });
 
         dialog.showAndWait().ifPresent(pc -> {
-          //  lab.addPc(pc);
+          //lab.addPc(pc);
             pcListView.getItems().add(pc);
         });
     }
