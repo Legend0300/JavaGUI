@@ -1,10 +1,13 @@
 package com.example;
-
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -14,22 +17,34 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UniversityGUI extends Application {
-    private University university;
+    private List<University> universityList = new ArrayList<>();
     private TextField nameField;
     private ListView<String> campusListView;
+    private int currentUniversityIndex = -1;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("University GUI");
 
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(10));
+
+        // Create the back button
+        Button backButton = new Button("<");
+        backButton.setOnAction(e -> primaryStage.setScene(createMenuScene()));
+
+        // Create a VBox to hold the back button
+        VBox topVBox = new VBox(backButton);
+        topVBox.setPadding(new Insets(10));
+        borderPane.setTop(topVBox);
+
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10));
         grid.setVgap(10);
         grid.setHgap(10);
 
@@ -43,7 +58,7 @@ public class UniversityGUI extends Application {
         VBox.setVgrow(campusListView, Priority.ALWAYS);
         campusListView.setPrefHeight(200);
         grid.add(campusLabel, 0, 1);
-        grid.add(campusListView, 0, 2, 2, 1);
+        grid.add(campusListView, 1, 1);
 
         Button addCampusButton = new Button("Add Campus");
         addCampusButton.setOnAction(e -> addCampus());
@@ -64,6 +79,8 @@ public class UniversityGUI extends Application {
         Scene scene = new Scene(grid, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        loadUniversity();
     }
 
     private void addCampus() {
@@ -72,8 +89,6 @@ public class UniversityGUI extends Application {
         dialog.setHeaderText("Enter Campus Name");
         dialog.setContentText("Campus Name:");
         dialog.showAndWait().ifPresent(campusName -> {
-//            Campus campus = new Campus(campusName, campusName);
-//            university.addCampus(campus);
             campusListView.getItems().add(campusName);
         });
     }
@@ -81,22 +96,23 @@ public class UniversityGUI extends Application {
     private void removeCampus() {
         int selectedIndex = campusListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1) {
-            String campusName = campusListView.getSelectionModel().getSelectedItem();
-            Campus campus = university.getCampus(campusName);
-            university.removeCampus(campus);
             campusListView.getItems().remove(selectedIndex);
         }
     }
 
     private void saveUniversity() {
-        String filename = "university.txt";
-        University uni = new University(nameField.getText());
-        ArrayList<String> campuses = new ArrayList<>(campusListView.getItems());
-        for (String c : campuses) {
-            Campus camp = new Campus(c);
-            uni.addCampus(camp);
+        if (currentUniversityIndex != -1) {
+            University university = universityList.get(currentUniversityIndex);
+            university.setName(nameField.getText());
+            university.getCampuses().clear();
+            university.getCampuses().addAll(campusListView.getItems());
+        } else {
+            University university = new University(nameField.getText());
+            university.getCampuses().addAll(campusListView.getItems());
+            universityList.add(university);
+            currentUniversityIndex = universityList.size() - 1;
         }
-        uni.saveToFile(filename);
+        University.saveAll(universityList, "universities.ser");
     }
 
     private void loadUniversity() {
@@ -105,7 +121,7 @@ public class UniversityGUI extends Application {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("University File", "*.uni"));
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            university = University.loadFromFile(file.getPath());
+            University university = University.loadFromFile(file.getPath());
             if (university != null) {
                 nameField.setText(university.getName());
                 campusListView.getItems().clear();

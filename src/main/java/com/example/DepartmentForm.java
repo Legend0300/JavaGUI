@@ -8,6 +8,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 public class DepartmentForm extends Application {
     private TextField departmentNameField;
     private TextField hodNameField;
@@ -49,11 +60,26 @@ public class DepartmentForm extends Application {
         gridPane.add(labListView, 1, 3);
         gridPane.add(saveButton, 0, 4);
 
-        // Set up event handling
-        addLabButton.setOnAction(e -> addLab());
+        // Create the "Back" button
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+            Menu menu = new Menu();
+            menu.start(new Stage());
+            primaryStage.close();
+        });
+
+        // Create an HBox to hold the buttons
+        HBox buttonsBox = new HBox(10);
+        buttonsBox.setAlignment(Pos.CENTER);
+        buttonsBox.getChildren().addAll(backButton, saveButton);
+
+        // Create a VBox to hold the main content and the buttons
+        VBox vbox = new VBox(10);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(gridPane, buttonsBox);
 
         // Set up scene and stage
-        Scene scene = new Scene(gridPane);
+        Scene scene = new Scene(vbox);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Department Form");
         primaryStage.show();
