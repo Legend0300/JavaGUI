@@ -9,7 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,13 +68,7 @@ public class DirectorGUI extends Application {
 //        grid.add(directorPasswordField, 1, 5);
 
         Button saveButton = new Button("Save");
-        saveButton.setOnAction(e -> {
-            try {
-                saveDirector();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        saveButton.setOnAction(e -> saveDirector());
         grid.add(saveButton, 0, 6);
 
         Button loadButton = new Button("Search");
@@ -83,7 +80,7 @@ public class DirectorGUI extends Application {
         primaryStage.show();
     }
 
-    private void saveDirector() throws IOException {
+    private void saveDirector() {
         String username = usernameField.getText();
         String grade = gradeField.getText();
         String password = passwordField.getText();
@@ -93,35 +90,17 @@ public class DirectorGUI extends Application {
         //director.setDirectorDetails(new Director(username, grade, password));
         directors.add(director);
 
-        String filePath = "D:\\JAVA Projects\\JavaGUI(2)\\src\\main\\java\\com\\example\\director.txt";
 
-        try {
-            // Open a file output stream
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
 
-            // Wrap the file output stream in an object output stream
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            // Write the object to the file
-            objectOutputStream.writeObject(director);
 
-            // Close the object output stream and the file output stream
-            objectOutputStream.close();
-            fileOutputStream.close();
-
-            System.out.println("Object written to file successfully.");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Director");
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            director.saveToFile(file.getPath());
         }
     }
-
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Save Director");
-//        File file = fileChooser.showSaveDialog(null);
-//        if (file != null) {
-//            director.saveToFile(file.getPath());
-//        }
 
     private void loadDirector() {
         Dialog<String> dialog = new Dialog<>();
