@@ -1,10 +1,10 @@
 package com.example;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -52,7 +52,32 @@ public class LabStaffGUI extends Application {
         loadButton.setOnAction(e -> loadLabStaff());
         grid.add(loadButton, 1, 3);
 
-        Scene scene = new Scene(grid, 300, 150);
+        // Create the "Menu" button
+        Button menuButton = new Button(" < ");
+        menuButton.setPrefSize(40, 40);
+        menuButton.setOnAction(e -> {
+            Menu menu = new Menu();
+            menu.start(new Stage());
+            primaryStage.close();
+        });
+
+        // Create an HBox to hold the buttons
+        HBox buttonsBox = new HBox(10);
+        buttonsBox.setAlignment(Pos.CENTER);
+        buttonsBox.getChildren().addAll(saveButton, loadButton);
+
+        // Create a StackPane to hold the "Menu" button
+        StackPane menuButtonPane = new StackPane(menuButton);
+        menuButtonPane.setAlignment(Pos.TOP_LEFT);
+        menuButtonPane.setPadding(new Insets(10));
+
+        // Create a BorderPane to hold the main content and the "Menu" button
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(grid);
+        borderPane.setBottom(buttonsBox);
+        borderPane.setTop(menuButtonPane);
+
+        Scene scene = new Scene(borderPane, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
