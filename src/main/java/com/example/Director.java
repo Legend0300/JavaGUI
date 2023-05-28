@@ -2,7 +2,7 @@ package com.example;
 import java.io.*;
 import java.util.Scanner;
 
-public class Director extends Employee {
+public class Director extends Employee implements Serializable {
     Employee directorDetails;
 
     public Director(String username, String grade, String password) {
